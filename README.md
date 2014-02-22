@@ -56,6 +56,8 @@ server.stdout.on('data', function (data) {
 });
 ```
 
+NB. The spawned process must be killed for the coverage data to be collected
+
 License
 -------
 
