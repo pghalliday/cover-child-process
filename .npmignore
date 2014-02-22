@@ -1,0 +1,17 @@
+/cookbooks/
+/test/
+/mocks/
+/vagrant-scripts/
+/.vagrant/
+/node_modules/
+/reports/
+/src/
+npm-debug.log
+.DS_Store
+Berksfile.lock
+lib-cov
+.travis.yml
+Berksfile
+Gruntfile.coffee
+Vagrantfile
+.npmignore
