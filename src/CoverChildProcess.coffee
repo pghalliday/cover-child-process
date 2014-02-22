@@ -1,5 +1,5 @@
 class CoverChildProcess
-  constructor: (instrumentation) ->
+  constructor: (options) ->
 
 
 module.exports = CoverChildProcess

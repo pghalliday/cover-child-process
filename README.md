@@ -29,7 +29,9 @@ Use as you would the standard `child_process.exec` and `child_process.spawn` met
 var CoverChildProcess = require('cover-child-process');
 
 // Use the constructor to tell the library how the source has been instrumented
-var coverChildProcess = new CoverChildProcess('blanket');
+var coverChildProcess = new CoverChildProcess({
+  instrumentation: 'blanket'
+});
 
 var child = coverChildProcess.exec(
   '../lib-cov/cli.js init something', {
@@ -46,7 +48,9 @@ var child = coverChildProcess.exec(
 var CoverChildProcess = require('cover-child-process');
 
 // Use the constructor to tell the library how the source has been instrumented
-var coverChildProcess = new CoverChildProcess('blanket');
+var coverChildProcess = new CoverChildProcess({
+  instrumentation: 'blanket'
+});
 
 var server = coverChildProcess.spawn(
   '../lib-cov/server.js', [
@@ -63,6 +67,18 @@ server.stdout.on('data', function (data) {
 ```
 
 NB. The spawned process must be killed for the coverage data to be collected
+
+### Optionally specify an object to merge coverage data into
+
+This feature is used internally in the tests for this project but if needed can also be used in your own projects if required
+
+```javascript
+var coverageData = {};
+var coverChildProcess = new CoverChildProcess({
+  instrumentation: 'blanket',
+  coverageData: coverageData
+});
+```
 
 License
 -------
