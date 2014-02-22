@@ -28,7 +28,7 @@ Use as you would the standard `child_process.exec` and `child_process.spawn` met
 ```javascript
 var CoverChildProcess = require('cover-child-process');
 
-// Use the constructor to tell the library how the source has been covered
+// Use the constructor to tell the library how the source has been instrumented
 var coverChildProcess = new CoverChildProcess('blanket');
 
 var child = coverChildProcess.exec(
@@ -45,7 +45,7 @@ var child = coverChildProcess.exec(
 ```javascript
 var CoverChildProcess = require('cover-child-process');
 
-// Use the constructor to tell the library how the source has been covered
+// Use the constructor to tell the library how the source has been instrumented
 var coverChildProcess = new CoverChildProcess('blanket');
 
 var server = coverChildProcess.spawn(
