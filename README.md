@@ -28,9 +28,13 @@ Use as you would the standard `child_process.exec` and `child_process.spawn`
 ```javascript
 var exec = require('cover-child-process').exec;
 
-var child = exec('../lib-cov/cli.js', {cwd: '../fixtures/test-scenario'}, function(error, stdout, stderr) {
-  // done
-});
+var child = exec(
+  '../lib-cov/cli.js', {
+    cwd: '../fixtures/test-scenario'
+  }, function (error, stdout, stderr) {
+    // Test output, etc, then done
+  }
+);
 ```
 
 ### #spawn
@@ -38,7 +42,13 @@ var child = exec('../lib-cov/cli.js', {cwd: '../fixtures/test-scenario'}, functi
 ```javascript
 var spawn = require('cover-child-process').spawn;
 
-var server = spawn('../lib-cov/server.js', ['8080'], {env: process.env});
+var server = spawn(
+  '../lib-cov/server.js', [
+    '8080'
+  ], {
+    env: process.env
+  }
+);
 
 server.stdout.on('data', function (data) {
   // When server has started run tests, then kill the child process
