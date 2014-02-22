@@ -70,7 +70,7 @@ NB. The spawned process must be killed for the coverage data to be collected
 
 ### Optionally specify an object to merge coverage data into
 
-This feature is used internally in the tests for this project but if needed can also be used in your own projects if required
+This feature is used internally in the tests for this project but if needed can also be used in your own projects
 
 ```javascript
 var coverageData = {};
