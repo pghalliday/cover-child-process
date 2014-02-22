@@ -25,7 +25,7 @@ Use as you would the standard `child_process.exec` and `child_process.spawn`
 
 ### #exec
 
-```
+```javascript
 var exec = require('cover-child-process').exec;
 
 var child = exec('../lib-cov/cli.js', {cwd: '../fixtures/test-scenario'}, function(error, stdout, stderr) {
@@ -35,7 +35,7 @@ var child = exec('../lib-cov/cli.js', {cwd: '../fixtures/test-scenario'}, functi
 
 ### #spawn
 
-```
+```javascript
 var spawn = require('cover-child-process').spawn;
 
 var server = spawn('../lib-cov/server.js', ['8080'], {env: process.env});
