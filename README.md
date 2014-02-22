@@ -8,7 +8,7 @@ cover-child-process
 
 NPM module to collect coverage data from tests that need to spawn NodeJS child processes. Eg. end to end tests and/or tests on command line interfaces
 
-Implements `spawn` and `exec` functions that wrap a target NodeJS script that has been instrumented for coverage data, collects the coverage data and merges it with the coverage data already collected in the parent process.
+Implements `spawn` and `exec` functions that wrap a target NodeJS script that has already been instrumented for coverage data, collects the coverage data and merges it with the coverage data already collected in the parent process.
 
 Currently only supports files instrumented with [Blanket](https://www.npmjs.org/package/blanket)
 
@@ -26,9 +26,12 @@ Use as you would the standard `child_process.exec` and `child_process.spawn` met
 ### #exec
 
 ```javascript
-var exec = require('cover-child-process').exec;
+var CoverChildProcess = require('cover-child-process');
 
-var child = exec(
+// Use the constructor to tell the library how the source has been covered
+var coverChildProcess = new CoverChildProcess('blanket');
+
+var child = coverChildProcess.exec(
   '../lib-cov/cli.js init something', {
     cwd: '../fixtures/test-scenario'
   }, function (error, stdout, stderr) {
@@ -40,9 +43,12 @@ var child = exec(
 ### #spawn
 
 ```javascript
-var spawn = require('cover-child-process').spawn;
+var CoverChildProcess = require('cover-child-process');
 
-var server = spawn(
+// Use the constructor to tell the library how the source has been covered
+var coverChildProcess = new CoverChildProcess('blanket');
+
+var server = coverChildProcess.spawn(
   '../lib-cov/server.js', [
     '8080'
   ], {
