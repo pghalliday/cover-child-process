@@ -29,7 +29,7 @@ Use as you would the standard `child_process.exec` and `child_process.spawn`
 var exec = require('cover-child-process').exec;
 
 var child = exec(
-  '../lib-cov/cli.js', {
+  '../lib-cov/cli.js init something', {
     cwd: '../fixtures/test-scenario'
   }, function (error, stdout, stderr) {
     // Test output, etc, then done
