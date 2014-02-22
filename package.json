@@ -21,7 +21,7 @@
       "url": "https://github.com/pghalliday/cover-child-process/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/index.js",
+  "main": "lib/CoverChildProcess.js",
   "engines": {
     "node": ">= 0.10.4"
   },
@@ -47,11 +47,15 @@
     "grunt-mocha-test": "~0.9.0",
     "grunt-contrib-coffee": "^0.10.1",
     "grunt-contrib-watch": "^0.5.3",
-    "grunt-mkdir": "^0.1.1"
+    "grunt-mkdir": "^0.1.1",
+    "proxyquire": "^0.5.2"
   },
   "keywords": [
     "test",
     "coverage",
     "child process"
-  ]
+  ],
+  "dependencies": {
+    "uuid": "^1.4.1"
+  }
 }

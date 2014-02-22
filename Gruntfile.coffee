@@ -11,23 +11,23 @@ module.exports = (grunt) ->
     coffee:
       build:
         expand: true 
-        src: ['src/**/*.coffee', 'test/**/*.coffee', 'fixtures/**/*.coffee']
+        src: ['src/**/*.coffee', 'test/**/*.coffee', 'mocks/**/*.coffee', 'fixtures/**/*.coffee']
         dest: 'lib'
         ext: '.js'
     copy:
-      build:
-        src: []
-        dest: 'lib/'
       coverage:
         src: ['lib/test/**']
+        dest: 'lib-cov/'
+      fixtures:
+        src: ['lib/fixtures/**']
         dest: 'lib-cov/'
     blanket:
       source:
         src: ['lib/src/']
         dest: 'lib-cov/lib/src'
-      fixtures:
-        src: ['lib/fixtures/']
-        dest: 'lib-cov/lib/fixtures'
+      mocks:
+        src: ['lib/mocks/']
+        dest: 'lib-cov/lib/mocks'
     mochaTest:
       'spec':
         options: 
@@ -69,14 +69,13 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'build', [
     'clean:build'
-    'copy:build'
     'coffee:build'
   ]
 
   grunt.registerTask 'coverage', [
     'clean:coverage'
     'build'
-    'copy:coverage'
+    'copy'
     'blanket'
   ]
 

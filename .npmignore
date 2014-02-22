@@ -1,6 +1,7 @@
 /cookbooks/
 /test/
 /mocks/
+/fixtures/
 /vagrant-scripts/
 /.vagrant/
 /node_modules/
