@@ -21,7 +21,7 @@ Install and save to your `devDependencies`
 npm install --save-dev cover-child-process
 ```
 
-Use as you would the standard `child_process.exec` and `child_process.spawn`
+Use as you would the standard `child_process.exec` and `child_process.spawn` methods
 
 ### #exec
 
