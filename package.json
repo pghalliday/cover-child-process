@@ -1,6 +1,6 @@
 {
   "name": "cover-child-process",
-  "description": "Sonar friendly xunit reporter for Mocha",
+  "description": "Collect coverage data from child processes",
   "version": "0.1.0",
   "homepage": "https://github.com/pghalliday/cover-child-process",
   "author": {
