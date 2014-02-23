@@ -34,7 +34,7 @@ class ChildProcess
           fs.unlinkSync tmpData
         callback error, stdout, stderr
     else
-      callback new Error 'Only node processes are supported'
+      exec command, options, callback
 
   spawn: (command, args, options) =>
     if command == 'node'
@@ -56,6 +56,6 @@ class ChildProcess
           @instrumentation.merge JSON.parse fs.readFileSync tmpData
           fs.unlinkSync tmpData
     else
-      throw new Error 'Only node processes are supported'      
+      spawn command, args, options
 
 module.exports = ChildProcess

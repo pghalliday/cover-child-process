@@ -24,11 +24,13 @@ describe 'ChildProcess', ->
         target.data2.should.equal 'This is test data 2'
         done()
 
-    it 'should error if a none node command is supplied', (done) ->
+    it 'should pass through none node commands to child_process', (done) ->
       target = {}
       childProcess = new ChildProcess new Instrumentation target
-      childProcess.exec 'notnode', {}, (error, stdout, stderr) ->
-        expect(error).to.eql new Error 'Only node processes are supported'
+      childProcess.exec 'pwd', {cwd: __dirname}, (error, stdout, stderr) ->
+        expect(error).to.not.be.ok
+        stdout.should.equal __dirname + '\n'
+        stderr.should.equal ''
         done()
 
   describe '#spawn', ->
@@ -43,7 +45,13 @@ describe 'ChildProcess', ->
         target.data2.should.equal 'This is test data 2'
         done()
 
-    it 'should throw an error if a none node command is supplied', ->
+    it 'should pass through none node commands to child_process', (done) ->
       target = {}
       childProcess = new ChildProcess new Instrumentation target
-      expect(childProcess.spawn.bind childProcess, 'notnode', [], {}).to.throw 'Only node processes are supported'
+      child = childProcess.spawn 'pwd', [], {cwd: __dirname}
+      stdout = ''
+      child.stdout.on 'data', (data) ->
+        stdout += data
+      child.on 'exit', ->
+        stdout.should.equal __dirname + '\n'
+        done()

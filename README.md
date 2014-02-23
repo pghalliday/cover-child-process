@@ -41,7 +41,7 @@ var child = childProcess.exec(
 );
 ```
 
-NB. If the command does not begin with `node` then an error will be returned
+NB. If the command does not begin with `node` then it will be passed directly to `child_process` without capturing coverage data
 
 ### #spawn
 
@@ -67,7 +67,7 @@ server.stdout.on('data', function (data) {
 });
 ```
 
-NB. If the supplied command is not `node` then this will throw an error
+NB. If the supplied command is not `node` then it will be passed directly to `child_process` without capturing coverage data
 
 NNB. The spawned process must be killed with the default `SIGTERM` signal for the coverage data to be collected
 
