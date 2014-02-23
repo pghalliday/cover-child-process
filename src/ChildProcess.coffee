@@ -14,7 +14,7 @@ class ChildProcess
     tokens = command.split ' '
     if tokens[0] == 'node'
       tokens.shift()
-      tmpdir = os.tmpdir()
+      tmpdir = os.tmpDir()
       tmpProxy = path.join tmpdir, uuid.v1()
       tmpData = path.join tmpdir, uuid.v1()
       # copy the proxy to a temp file so that it can be used recursively
@@ -38,7 +38,7 @@ class ChildProcess
 
   spawn: (command, args, options) =>
     if command == 'node'
-      tmpdir = os.tmpdir()
+      tmpdir = os.tmpDir()
       tmpProxy = path.join tmpdir, uuid.v1()
       tmpData = path.join tmpdir, uuid.v1()
       # copy the proxy to a temp file so that it can be used recursively
