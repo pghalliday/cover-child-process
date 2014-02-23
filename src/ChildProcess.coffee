@@ -14,17 +14,18 @@ class ChildProcess
     tokens = command.split ' '
     if tokens[0] == 'node'
       tokens.shift()
-      tmpProxy = path.join os.tmpdir(), uuid.v1()
-      tmpData = path.join os.tmpdir(), uuid.v1()
+      tmpdir = os.tmpdir()
+      tmpProxy = path.join tmpdir, uuid.v1()
+      tmpData = path.join tmpdir, uuid.v1()
       # copy the proxy to a temp file so that it can be used recursively
       # (Although I think the only use case for this is in collecting coverage
       # data for itself - which only needs to be done in this project :))
       fs.writeFileSync tmpProxy, fs.readFileSync path.join __dirname, 'coverageProxy.js'
       commands = [
         'node'
-        tmpProxy
-        @instrumentation.collector()
-        tmpData
+        '"' + tmpProxy + '"'
+        '"' + @instrumentation.collector() + '"'
+        '"' + tmpData + '"'
       ].concat tokens
       exec commands.join(' '), options, (error, stdout, stderr) =>
         fs.unlinkSync tmpProxy
@@ -37,8 +38,9 @@ class ChildProcess
 
   spawn: (command, args, options) =>
     if command == 'node'
-      tmpProxy = path.join os.tmpdir(), uuid.v1()
-      tmpData = path.join os.tmpdir(), uuid.v1()
+      tmpdir = os.tmpdir()
+      tmpProxy = path.join tmpdir, uuid.v1()
+      tmpData = path.join tmpdir, uuid.v1()
       # copy the proxy to a temp file so that it can be used recursively
       # (Although I think the only use case for this is in collecting coverage
       # data for itself - which only needs to be done in this project :))

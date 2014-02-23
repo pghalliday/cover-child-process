@@ -6,12 +6,13 @@ module = process.argv[4]
 process.argv.splice 1, 3
 
 process.on 'exit', ->
-  require('fs').writeFileSync output, JSON.stringify require(collector)()
+  require('fs').writeFileSync output, JSON.stringify require(require('path').resolve(collector))()
 
 # need to handle SIGTERM in order to fire the exit event using process.exit
 # otherwise the process will exit without firing the exit event :s
 process.on 'SIGTERM', ->
   process.exit()
 
-# require the module we are proxying
-require module
+# require the module we are proxying but resolve the path relative to CWD
+# instead of the default require behaviour of relative to this module
+require require('path').resolve module
