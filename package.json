@@ -21,7 +21,7 @@
       "url": "https://github.com/pghalliday/cover-child-process/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/CoverChildProcess.js",
+  "main": "lib/src/index.js",
   "engines": {
     "node": ">= 0.10.4"
   },

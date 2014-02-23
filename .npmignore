@@ -7,6 +7,9 @@
 /node_modules/
 /reports/
 /src/
+/lib/fixtures/
+/lib/mocks/
+/lib/test/
 npm-debug.log
 .DS_Store
 Berksfile.lock
