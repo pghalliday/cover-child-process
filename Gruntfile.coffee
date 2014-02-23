@@ -55,7 +55,7 @@ module.exports = (grunt) ->
       all:
         src: 'reports/lcov.info'
     watch:
-      files: ['src/**/*.coffee', 'test/**/*.coffee', 'mock/**/*.coffee', '../fixtures/**']
+      files: ['src/**', 'test/**', 'mocks/**', 'fixtures/**']
       tasks: ['default']
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
