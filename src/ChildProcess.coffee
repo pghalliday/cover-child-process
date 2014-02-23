@@ -7,7 +7,7 @@ fs = require 'fs'
 exec = child_process.exec
 spawn = child_process.spawn
 
-class CoverChildProcess
+class ChildProcess
   constructor: (@instrumentation) ->
 
   exec: (command, options, callback) =>
@@ -32,9 +32,11 @@ class CoverChildProcess
           @instrumentation.merge JSON.parse fs.readFileSync tmpData
           fs.unlinkSync tmpData
         callback error, stdout, stderr
+    else
+      callback new Error 'Only node processes are supported'
 
   spawn: (command, args, options) =>
-    if command = 'node'
+    if command == 'node'
       tmpProxy = path.join os.tmpdir(), uuid.v1()
       tmpData = path.join os.tmpdir(), uuid.v1()
       # copy the proxy to a temp file so that it can be used recursively
@@ -51,5 +53,7 @@ class CoverChildProcess
         if fs.existsSync tmpData
           @instrumentation.merge JSON.parse fs.readFileSync tmpData
           fs.unlinkSync tmpData
+    else
+      throw new Error 'Only node processes are supported'      
 
-module.exports = CoverChildProcess
+module.exports = ChildProcess

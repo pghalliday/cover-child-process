@@ -1,8 +1,9 @@
-module.exports = ->
+module.exports = (_global) ->
+  _global = _global || global
   data =
     sourceArrays: {}
     callCounts: {}
-  jscoverage = global._$jscoverage
+  jscoverage = _global._$jscoverage
   if jscoverage
     # we have to create our own structure as the _$jscoverage
     # structure does not stringify to JSON fully as it skips

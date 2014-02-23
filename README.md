@@ -10,7 +10,7 @@ NPM module to collect coverage data from tests that need to spawn NodeJS child p
 
 Implements `spawn` and `exec` functions that wrap a target NodeJS script that has already been instrumented for coverage data, collects the coverage data and merges it with the coverage data already collected in the parent process.
 
-Currently only supports files instrumented with [Blanket](https://www.npmjs.org/package/blanket)
+Currently only supports files instrumented with [Blanket](https://www.npmjs.org/package/blanket). However, plugins for other similar instrumentation implementations can easily be created following the interface used for Blanket.
 
 Usage
 -----
@@ -21,20 +21,19 @@ Install and save to your `devDependencies`
 npm install --save-dev cover-child-process
 ```
 
-Use as you would the standard `child_process.exec` and `child_process.spawn` methods
+Use as you would the standard `child_process.exec` and `child_process.spawn` methods.
 
 ### #exec
 
 ```javascript
-var CoverChildProcess = require('cover-child-process');
+var ChildProcess = require('cover-child-process').ChildProcess;
+var Blanket = require('cover-child-process').Blanket;
 
 // Use the constructor to tell the library how the source has been instrumented
-var coverChildProcess = new CoverChildProcess({
-  instrumentation: 'blanket'
-});
+var childProcess = new ChildProcess(new Blanket());
 
-var child = coverChildProcess.exec(
-  '../lib-cov/cli.js init something', {
+var child = childProcess.exec(
+  'node ../lib-cov/cli.js init something', {
     cwd: '../fixtures/test-scenario'
   }, function (error, stdout, stderr) {
     // Test output, etc, then done
@@ -42,18 +41,20 @@ var child = coverChildProcess.exec(
 );
 ```
 
+NB. If the command does not begin with `node` then an error will be returned
+
 ### #spawn
 
 ```javascript
-var CoverChildProcess = require('cover-child-process');
+var ChildProcess = require('cover-child-process').ChildProcess;
+var Blanket = require('cover-child-process').Blanket;
 
 // Use the constructor to tell the library how the source has been instrumented
-var coverChildProcess = new CoverChildProcess({
-  instrumentation: 'blanket'
-});
+var childProcess = new ChildProcess(new Blanket());
 
-var server = coverChildProcess.spawn(
-  '../lib-cov/server.js', [
+var server = childProcess.spawn(
+  'node', [
+    '../lib-cov/server.js',
     '8080'
   ], {
     env: process.env
@@ -66,7 +67,8 @@ server.stdout.on('data', function (data) {
 });
 ```
 
-NB. The spawned process must be killed for the coverage data to be collected
+NB. If the supplied command is not `node` then this will throw an error
+NNB. The spawned process must be killed with the default `SIGTERM` signal for the coverage data to be collected
 
 ### Optionally specify an object to merge coverage data into
 
