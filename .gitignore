@@ -4,5 +4,4 @@ Berksfile.lock
 reports
 node_modules
 npm-debug.log
-lib
 lib-cov
