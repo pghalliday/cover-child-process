@@ -31,7 +31,7 @@
     }
   },
   "devDependencies": {
-    "chai": "^3.4.1",
+    "chai": "^3.5.0",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.0.0",
@@ -41,10 +41,10 @@
     "grunt-coveralls": "^1.0.1",
     "grunt-istanbul": "^0.7.1",
     "grunt-istanbul-coverage": "^0.1.4",
-    "grunt-mkdir": "^0.1.1",
-    "grunt-mocha-test": "^0.12.7",
+    "grunt-mkdir": "^1.0.0",
+    "grunt-mocha-test": "^0.13.0",
     "mocha": "^3.0.2",
-    "proxyquire": "^1.7.3"
+    "proxyquire": "^1.7.10"
   },
   "keywords": [
     "test",
