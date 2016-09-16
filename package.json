@@ -44,9 +44,7 @@
     "grunt-mkdir": "^0.1.1",
     "grunt-mocha-test": "^0.12.7",
     "mocha": "^3.0.2",
-    "mocha-lcov-reporter": "1.0.0",
-    "proxyquire": "^1.7.3",
-    "travis-cov": "^0.2.5"
+    "proxyquire": "^1.7.3"
   },
   "keywords": [
     "test",
