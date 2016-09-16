@@ -4,13 +4,13 @@ module.exports = (grunt) ->
       reports:
         options:
           create: ['reports']
-    clean: 
+    clean:
       build: ['lib']
       coverage: ['lib-cov']
       reports: ['reports']
     coffee:
       build:
-        expand: true 
+        expand: true
         src: ['src/**/*.coffee', 'test/**/*.coffee', 'mocks/**/*.coffee', 'fixtures/**/*.coffee']
         dest: 'lib'
         ext: '.js'
@@ -21,34 +21,35 @@ module.exports = (grunt) ->
       fixtures:
         src: ['lib/fixtures/**']
         dest: 'lib-cov/'
-    blanket:
-      source:
-        src: ['lib/src/']
-        dest: 'lib-cov/lib/src'
-      mocks:
-        src: ['lib/mocks/']
-        dest: 'lib-cov/lib/mocks'
+    instrument:
+      files: ['src/**/*.js', 'mocks/**/*.js']
+      options:
+        cwd: 'lib/'
+        lazy: true
+        basePath: 'lib-cov/lib/'
     mochaTest:
-      'spec':
-        options: 
+      spec:
+        options:
           reporter: 'spec'
         src: ['lib-cov/lib/test/**/*.js']
-      'html-cov':
-        options: 
-          reporter: 'html-cov'
-          quiet: true
-          captureFile: 'reports/coverage.html'
-        src: ['lib-cov/lib/test/**/*.js']
-      'mocha-lcov-reporter':
-        options: 
-          reporter: 'mocha-lcov-reporter'
-          quiet: true
-          captureFile: 'reports/lcov.info'
-        src: ['lib-cov/lib/test/**/*.js']
-      'travis-cov':
+    storeCoverage:
+      options:
+        dir: 'reports'
+    makeReport:
+      src: 'reports/**/*.json'
+      options:
+        type: 'lcov'
+        dir: 'reports'
+        print: 'detail'
+    coverage:
+      default:
         options:
-          reporter: 'travis-cov'
-        src: ['lib-cov/lib/test/**/*.js']
+          thresholds:
+            'statements': 100
+            'branches': 80
+            'lines': 100
+            'functions': 100
+          dir: 'reports'
     coveralls:
       options:
         force: true
@@ -60,7 +61,8 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
-  grunt.loadNpmTasks 'grunt-blanket'
+  grunt.loadNpmTasks 'grunt-istanbul'
+  grunt.loadNpmTasks 'grunt-istanbul-coverage'
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-mocha-test'
   grunt.loadNpmTasks 'grunt-contrib-watch'
@@ -72,36 +74,28 @@ module.exports = (grunt) ->
     'coffee:build'
   ]
 
-  grunt.registerTask 'coverage', [
+  grunt.registerTask 'buildCoverage', [
     'clean:coverage'
     'build'
     'copy'
-    'blanket'
+    'instrument'
   ]
 
-  grunt.registerTask 'defaultTest', [
+  grunt.registerTask 'test', [
     'mochaTest:spec'
-    'mochaTest:html-cov'
-    'mochaTest:travis-cov'
-  ]
-
-  grunt.registerTask 'ciTest', [
-    'mochaTest:spec'
-    'mochaTest:mocha-lcov-reporter'
-    'mochaTest:travis-cov'
+    'storeCoverage'
+    'makeReport'
+    'coverage'
   ]
 
   grunt.registerTask 'default', [
     'clean:reports'
     'mkdir:reports'
-    'coverage'
-    'defaultTest'
+    'buildCoverage'
+    'test'
   ]
 
   grunt.registerTask 'ci', [
-    'clean:reports'
-    'mkdir:reports'
-    'coverage'
-    'ciTest'
+    'default'
     'coveralls'
   ]

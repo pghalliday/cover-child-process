@@ -31,21 +31,22 @@
     }
   },
   "devDependencies": {
-    "mocha": "~2.3.4",
-    "grunt-cli": "~0.1.13",
-    "grunt": "~0.4.2",
-    "chai": "~3.4.1",
-    "grunt-blanket": "~0.0.8",
-    "grunt-contrib-copy": "~0.8.2",
-    "grunt-contrib-clean": "~0.7.0",
-    "travis-cov": "~0.2.5",
+    "chai": "^3.4.1",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-coveralls": "^1.0.1",
+    "grunt-istanbul": "^0.7.1",
+    "grunt-istanbul-coverage": "^0.1.4",
+    "grunt-mkdir": "^0.1.1",
+    "grunt-mocha-test": "^0.12.7",
+    "mocha": "^3.0.2",
     "mocha-lcov-reporter": "1.0.0",
-    "grunt-coveralls": "~1.0.0",
-    "grunt-mocha-test": "~0.12.7",
-    "grunt-contrib-coffee": "~0.13.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-mkdir": "~0.1.1",
-    "proxyquire": "~1.7.3"
+    "proxyquire": "^1.7.3",
+    "travis-cov": "^0.2.5"
   },
   "keywords": [
     "test",
@@ -53,6 +54,6 @@
     "child process"
   ],
   "dependencies": {
-    "uuid": "~2.0.1"
+    "uuid": "^2.0.2"
   }
 }
