@@ -1,7 +1,7 @@
 {
   "name": "cover-child-process",
   "description": "Collect coverage data from child processes",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "homepage": "https://github.com/pghalliday/cover-child-process",
   "author": {
     "name": "Peter Halliday",
