@@ -10,7 +10,9 @@ NPM module to collect coverage data from tests that need to spawn NodeJS child p
 
 Implements `spawn` and `exec` functions that wrap a target NodeJS script that has already been instrumented for coverage data, collects the coverage data and merges it with the coverage data already collected in the parent process.
 
-Currently only supports files instrumented with [Blanket](https://www.npmjs.org/package/blanket). However, plugins for other similar instrumentation implementations can easily be created following the interface used for Blanket.
+Currently only supports files instrumented with [Blanket](https://www.npmjs.org/package/blanket) or [Istanbul](https://www.npmjs.org/package/istanbul). However, plugins for other similar instrumentation implementations can easily be created following the interface used for either.
+
+NB. If using Istanbul then this approach is only necessary if it really isn't possible to get your child processes to generate their own coverage files which Istanbul can then merge on it's own (TBH it's hard to imagine such a case)
 
 Usage
 -----
@@ -27,10 +29,10 @@ Use as you would the standard `child_process.exec` and `child_process.spawn` met
 
 ```javascript
 var ChildProcess = require('cover-child-process').ChildProcess;
-var Blanket = require('cover-child-process').Blanket;
+var Istanbul = require('cover-child-process').Istanbul;
 
 // Use the constructor to tell the library how the source has been instrumented
-var childProcess = new ChildProcess(new Blanket());
+var childProcess = new ChildProcess(new Istanbul());
 
 var child = childProcess.exec(
   'node ../lib-cov/cli.js init something', {
@@ -47,10 +49,10 @@ NB. If the command does not begin with `node` then it will be passed directly to
 
 ```javascript
 var ChildProcess = require('cover-child-process').ChildProcess;
-var Blanket = require('cover-child-process').Blanket;
+var Istanbul = require('cover-child-process').Istanbul;
 
 // Use the constructor to tell the library how the source has been instrumented
-var childProcess = new ChildProcess(new Blanket());
+var childProcess = new ChildProcess(new Istanbul());
 
 var server = childProcess.spawn(
   'node', [
